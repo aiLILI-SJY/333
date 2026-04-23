@@ -1,0 +1,105 @@
+page { background-color: var(--color-bg); }
+.page {
+  padding: 32rpx 40rpx 80rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 32rpx;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.header { display: flex; flex-direction: column; gap: 8rpx; }
+.h1 {
+  font-size: 56rpx;
+  font-weight: 700;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--color-on-surface);
+}
+.sub { font-size: 26rpx; color: var(--color-outline); }
+
+.filter-bar {
+  display: flex;
+  gap: 12rpx;
+  overflow-x: auto;
+}
+.filter-tab {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 14rpx 28rpx;
+  border-radius: 999rpx;
+  background-color: var(--color-chip-bg);
+  color: var(--color-text-secondary);
+  font-size: 26rpx;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.filter-tab.active {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+.filter-tab .count {
+  background-color: rgba(255,255,255,0.25);
+  padding: 0 12rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+}
+.filter-tab:not(.active) .count {
+  background-color: rgba(0,0,0,0.06);
+  color: var(--color-on-surface-variant);
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  padding: 120rpx 0;
+}
+.empty-icon { font-size: 100rpx; opacity: 0.5; }
+.empty-title { font-size: 32rpx; font-weight: 600; color: var(--color-on-surface-variant); }
+.empty-sub { font-size: 26rpx; color: var(--color-outline); }
+
+.list { display: flex; flex-direction: column; gap: 20rpx; }
+.card {
+  background-color: var(--color-surface);
+  border: 1rpx solid var(--color-border);
+  border-radius: 20rpx;
+  padding: 28rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  position: relative;
+}
+.type-tag {
+  align-self: flex-start;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.type-hotspot { background-color: #FFE7D6; color: var(--color-tertiary); }
+.type-discussion { background-color: var(--color-primary-tint); color: var(--color-primary); }
+.type-skill { background-color: var(--color-secondary-tint); color: var(--color-secondary); }
+.type-path { background-color: #EDE7F6; color: #5E35B1; }
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  line-height: 1.4;
+  padding-right: 100rpx;
+}
+.card-time { font-size: 22rpx; color: var(--color-outline); }
+.del-btn {
+  position: absolute;
+  right: 24rpx;
+  top: 24rpx;
+  font-size: 22rpx;
+  color: var(--color-error);
+  padding: 6rpx 16rpx;
+  border: 1rpx solid var(--color-error-container);
+  border-radius: 8rpx;
+}
+.del-btn:active { opacity: 0.7; }

@@ -1,0 +1,94 @@
+<view class="page-container" style="padding-top: {{statusBarHeight}}px;">
+  <top-bar letter="A" bind:search="onSearch"/>
+
+  <skeleton wx:if="{{firstLoading}}" visible="{{true}}"/>
+
+  <view wx:else class="content">
+    <!-- 欢迎 & 搜索 -->
+    <view class="section welcome-section">
+      <text class="label-caps uppercase">欢迎回来</text>
+      <text class="h2">{{welcomeRole}}</text>
+      <view class="search-wrap">
+        <text class="search-icon">⌕</text>
+        <input
+          class="search-input"
+          placeholder="搜索趋势、框架、话题..."
+          placeholder-style="color:#9aa0a6;"
+          value="{{searchKeyword}}"
+          bindinput="onSearchInput"
+          bindconfirm="onSearchConfirm"
+        />
+      </view>
+    </view>
+
+    <!-- 今日热点 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="h3">今日热点</text>
+        <text class="link" bindtap="onMoreHotspots">查看全部</text>
+      </view>
+      <scroll-view scroll-x="true" class="hotspot-scroll" enhanced="true" show-scrollbar="{{false}}">
+        <view class="hotspot-list">
+          <view
+            class="hotspot-card"
+            wx:for="{{hotspots}}"
+            wx:key="id"
+            bindtap="onHotspotTap"
+            data-id="{{item.id}}"
+          >
+            <view class="hotspot-cover">
+              <image src="{{item.cover}}" mode="aspectFill" lazy-load="true"/>
+              <view class="hotspot-badge">
+                <text class="badge-dot {{item.badgeType}}">{{item.badgeIcon}}</text>
+                <text class="badge-text">{{item.badge}}</text>
+              </view>
+            </view>
+            <view class="hotspot-body">
+              <text class="hotspot-title">{{item.title}}</text>
+              <view class="hotspot-tags">
+                <text class="mini-chip" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 最新讨论 -->
+    <view class="section">
+      <text class="h3">最新讨论</text>
+      <view class="discussion-list">
+        <view
+          class="discussion-item"
+          wx:for="{{discussions}}"
+          wx:key="id"
+          bindtap="onDiscussionTap"
+          data-id="{{item.id}}"
+          data-title="{{item.title}}"
+        >
+          <view class="discussion-icon {{item.iconTone}}">
+            <text>{{item.iconText}}</text>
+          </view>
+          <view class="discussion-body">
+            <view class="discussion-meta">
+              <text class="chip {{item.chipTone}}">{{item.category}}</text>
+              <text class="read-time">⏱ {{item.readTime}}</text>
+            </view>
+            <text class="discussion-title">{{item.title}}</text>
+            <text class="discussion-desc">{{item.desc}}</text>
+          </view>
+          <view
+            class="fav-btn {{favMap[item.id] ? 'active' : ''}}"
+            catchtap="onFavoriteTap"
+            data-id="{{item.id}}"
+            data-title="{{item.title}}"
+          >
+            <text>{{favMap[item.id] ? '★' : '☆'}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="list-footer" wx:if="{{loadingMore}}">加载中…</view>
+      <view class="list-footer" wx:elif="{{!hasMore && discussions.length > 0}}">没有更多了</view>
+    </view>
+  </view>
+</view>

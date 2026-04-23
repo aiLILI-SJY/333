@@ -1,0 +1,47 @@
+<view class="page">
+  <view class="form">
+    <view class="form-row">
+      <text class="form-label">昵称</text>
+      <input
+        type="nickname"
+        class="form-input"
+        value="{{form.name}}"
+        placeholder="点此使用微信昵称"
+        data-key="name"
+        bindinput="onInput"
+        bindnicknamereview="onNickReview"
+        maxlength="20"
+      />
+    </view>
+    <view class="form-row">
+      <text class="form-label">学校</text>
+      <input class="form-input" value="{{form.school}}" placeholder="如 计算机学院, 贵州大学" data-key="school" bindinput="onInput" maxlength="40"/>
+    </view>
+    <view class="form-row">
+      <text class="form-label">年级</text>
+      <picker mode="selector" range="{{gradeOptions}}" value="{{gradeIndex}}" bindchange="onGradeChange">
+        <view class="form-picker">
+          <text class="{{form.grade ? '' : 'placeholder'}}">{{form.grade || '选择年级'}}</text>
+          <text class="caret">⌄</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-row">
+      <text class="form-label">专业</text>
+      <input class="form-input" value="{{form.major}}" placeholder="如 AI 专业 / 计算机科学" data-key="major" bindinput="onInput" maxlength="30"/>
+    </view>
+    <view class="form-row">
+      <text class="form-label">职业画像</text>
+      <input class="form-input" value="{{form.role}}" placeholder="如 软件工程师 2502" data-key="role" bindinput="onInput" maxlength="20"/>
+    </view>
+  </view>
+
+  <view class="hint">资料会立即保存到云端。昵称和头像也会同步到排行榜/分享卡片。</view>
+
+  <view class="actions safe-bottom">
+    <view class="btn-ghost" bindtap="onCancel">取消</view>
+    <view class="btn-primary {{saving ? 'disabled' : ''}}" bindtap="onSave">
+      {{saving ? '保存中…' : '保存'}}
+    </view>
+  </view>
+</view>

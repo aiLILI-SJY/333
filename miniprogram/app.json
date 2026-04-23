@@ -1,0 +1,77 @@
+{
+  "pages": [
+    "pages/trends/trends",
+    "pages/ai-analysis/ai-analysis",
+    "pages/dataviz/dataviz",
+    "pages/growth/growth",
+    "pages/profile/profile",
+    "pages/detail/detail",
+    "pages/edit-profile/edit-profile",
+    "pages/favorites/favorites",
+    "pages/history/history",
+    "pages/settings/settings"
+  ],
+  "subpackages": [
+    {
+      "root": "pkg-search",
+      "name": "search",
+      "pages": [
+        "pages/search/search"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/trends/trends": {
+      "network": "all",
+      "packages": ["search"]
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F8F9FA",
+    "navigationBarTitleText": "见世界",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f9f9ff"
+  },
+  "tabBar": {
+    "color": "#5F6368",
+    "selectedColor": "#1A73E8",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/trends/trends",
+        "text": "趋势",
+        "iconPath": "assets/tab/trends.png",
+        "selectedIconPath": "assets/tab/trends-active.png"
+      },
+      {
+        "pagePath": "pages/ai-analysis/ai-analysis",
+        "text": "AI分析",
+        "iconPath": "assets/tab/ai.png",
+        "selectedIconPath": "assets/tab/ai-active.png"
+      },
+      {
+        "pagePath": "pages/dataviz/dataviz",
+        "text": "数据",
+        "iconPath": "assets/tab/data.png",
+        "selectedIconPath": "assets/tab/data-active.png"
+      },
+      {
+        "pagePath": "pages/growth/growth",
+        "text": "成长",
+        "iconPath": "assets/tab/growth.png",
+        "selectedIconPath": "assets/tab/growth-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/tab/profile.png",
+        "selectedIconPath": "assets/tab/profile-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

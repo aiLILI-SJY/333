@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "浏览历史",
+  "navigationBarBackgroundColor": "#F8F9FA",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "onReachBottomDistance": 80
+}

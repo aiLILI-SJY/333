@@ -1,0 +1,111 @@
+<view class="page-container" style="padding-top: {{statusBarHeight}}px;">
+  <top-bar letter="A" bind:search="onSearch"/>
+
+  <view class="content">
+    <!-- 资料头部 -->
+    <view class="profile-head">
+      <button
+        class="avatar-btn"
+        open-type="chooseAvatar"
+        bindchooseavatar="onChooseAvatar"
+      >
+        <view class="avatar-wrap">
+          <view class="avatar-circle">
+            <image wx:if="{{avatar}}" src="{{avatar}}" class="avatar-img" mode="aspectFill"/>
+            <text wx:else class="avatar-initial">{{avatarInitial}}</text>
+          </view>
+          <view class="verified-badge">✓</view>
+          <view class="avatar-edit-hint">点击换头像</view>
+        </view>
+      </button>
+      <view class="name-col">
+        <text class="h1">{{user.name}}</text>
+        <text class="body-lg text-muted">{{user.school}}</text>
+      </view>
+      <view class="user-chips">
+        <text class="chip">{{user.grade}}</text>
+        <text class="chip">{{user.major}}</text>
+      </view>
+      <view class="quick-actions">
+        <view class="quick-btn" bindtap="onQuickEdit">
+          <text class="qb-icon">✎</text>
+          <text>编辑资料</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 学习记录 -->
+    <view class="stat-card">
+      <view class="stat-head">
+        <text class="icon-box">📄</text>
+        <text class="h3">学习记录</text>
+      </view>
+      <text class="stat-sub">本学期已阅读文章与论文</text>
+      <view class="stat-figure">
+        <text class="big-num">{{readCount}}</text>
+        <text class="delta">↑ {{readDelta}}%</text>
+      </view>
+      <view class="progress-track success">
+        <view class="progress-fill success" style="width:{{readProgress}}%;"></view>
+      </view>
+      <text class="target-text">目标: {{readTarget}}</text>
+    </view>
+
+    <!-- 技能雷达 -->
+    <view class="skill-card">
+      <text class="h3">技能维度</text>
+      <view class="radar-wrap">
+        <canvas
+          type="2d"
+          id="radarCanvas"
+          class="radar-canvas"
+          disable-scroll="true"
+          bindtap="onRadarTap"
+        ></canvas>
+      </view>
+      <view wx:if="{{selectedRadar}}" class="radar-detail">
+        <text class="radar-name">{{selectedRadar.label}}</text>
+        <text class="radar-score">掌握度 {{selectedRadar.percent}}%</text>
+      </view>
+    </view>
+
+    <!-- 职业发展轨迹 -->
+    <view class="career-card">
+      <view class="stat-head">
+        <text class="icon-box">🧭</text>
+        <text class="h3">职业发展轨迹</text>
+      </view>
+      <text class="stat-sub">AI 生成的职业画像匹配</text>
+      <view class="career-title-pill">
+        <text>{{careerTitle || 'AI 算法工程师'}}</text>
+      </view>
+      <view class="career-tags">
+        <text class="career-tag" wx:for="{{careerTags}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 设置入口 -->
+    <view class="menu-list">
+      <view class="menu-item" bindtap="onMenuTap" data-id="edit">
+        <text class="menu-icon">✎</text>
+        <text class="menu-text">编辑资料</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="onMenuTap" data-id="favorites">
+        <text class="menu-icon">★</text>
+        <text class="menu-text">我的收藏</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="onMenuTap" data-id="history">
+        <text class="menu-icon">⏱</text>
+        <text class="menu-text">浏览历史</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="onMenuTap" data-id="settings">
+        <text class="menu-icon">⚙</text>
+        <text class="menu-text">设置</text>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+  </view>
+</view>

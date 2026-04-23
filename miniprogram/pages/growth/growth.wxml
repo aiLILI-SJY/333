@@ -1,0 +1,74 @@
+<view class="page-container" style="padding-top: {{statusBarHeight}}px;">
+  <top-bar letter="A" bind:search="onSearch"/>
+
+  <view class="content">
+    <!-- Section 头 -->
+    <view class="section">
+      <view class="row gap-xs">
+        <text class="big-icon">🧠</text>
+        <text class="h2">AI 驱动的技能路径</text>
+      </view>
+      <text class="subtitle">您的个性化学习轨迹，根据最新的市场趋势和您的学习进度动态调整。</text>
+    </view>
+
+    <!-- 成长树 -->
+    <view class="tree-card">
+      <view class="refresh-indicator">
+        <view class="pulse">
+          <view class="pulse-dot"></view>
+          <view class="pulse-ring"></view>
+        </view>
+        <text class="refresh-text">路径已自动刷新</text>
+      </view>
+
+      <view class="path-list">
+        <view class="path-node {{item.status}}" wx:for="{{pathNodes}}" wx:key="id" bindtap="onNodeTap" data-id="{{item.id}}" data-status="{{item.status}}">
+          <!-- 连接圆点 -->
+          <view class="connector-line" wx:if="{{index !== 0}}"></view>
+          <view class="connector-dot {{item.status}}">
+            <text>{{item.dotIcon}}</text>
+          </view>
+
+          <view class="node-body">
+            <view class="node-head">
+              <view class="row gap-xs">
+                <text class="node-title {{item.status === 'progress' ? 'primary' : ''}}">{{item.title}}</text>
+                <text class="tag {{item.tagTone}}">{{item.tag}}</text>
+              </view>
+              <text class="node-desc">{{item.desc}}</text>
+
+              <!-- 进度条 - 仅进行中显示 -->
+              <view class="progress-section" wx:if="{{item.status === 'progress'}}">
+                <view class="progress-meta">
+                  <text class="label-caps">当前进度</text>
+                  <text class="label-caps">{{item.progress}}%</text>
+                </view>
+                <view class="progress-track">
+                  <view class="progress-fill" style="width:{{item.progress}}%;"></view>
+                </view>
+              </view>
+            </view>
+
+            <view class="node-side {{item.status}}">
+              <view wx:if="{{item.status === 'done'}}" class="side-text secondary">
+                <text>✓</text>
+                <text>已精通</text>
+              </view>
+              <view wx:elif="{{item.status === 'progress'}}" class="side-box">
+                <view class="side-text primary">
+                  <text>⏱</text>
+                  <text>预计 {{item.eta}} 掌握</text>
+                </view>
+                <view class="node-cta" catchtap="onContinueLearn" data-id="{{item.id}}">继续学习</view>
+              </view>
+              <view wx:else class="side-text muted">
+                <text>🔒</text>
+                <text>未解锁</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

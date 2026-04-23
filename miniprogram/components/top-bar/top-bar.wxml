@@ -1,0 +1,12 @@
+<view class="top-app-bar">
+  <view class="row gap-xs" bindtap="onAvatarTap">
+    <view class="avatar">
+      <image src="{{avatar}}" mode="aspectFill" wx:if="{{avatar}}"/>
+      <text wx:else class="avatar-letter">{{letter}}</text>
+    </view>
+    <text class="logo">见世界</text>
+  </view>
+  <view class="icon-btn" bindtap="onSearch">
+    <text class="iconfont-search">⌕</text>
+  </view>
+</view>

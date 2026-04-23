@@ -1,0 +1,19 @@
+<view wx:if="{{visible}}" class="skeleton">
+  <view class="sk-hotspot-row">
+    <view class="sk-card" wx:for="{{[1,2]}}" wx:key="*this">
+      <view class="sk-cover"></view>
+      <view class="sk-line w60"></view>
+      <view class="sk-line w40"></view>
+    </view>
+  </view>
+  <view class="sk-list">
+    <view class="sk-item" wx:for="{{[1,2,3]}}" wx:key="*this">
+      <view class="sk-icon"></view>
+      <view class="sk-body">
+        <view class="sk-line w30"></view>
+        <view class="sk-line w80"></view>
+        <view class="sk-line w60"></view>
+      </view>
+    </view>
+  </view>
+</view>

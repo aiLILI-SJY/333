@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "趋势摘要",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "onReachBottomDistance": 80,
+  "usingComponents": {
+    "top-bar": "/components/top-bar/top-bar",
+    "skeleton": "/components/skeleton/skeleton"
+  }
+}

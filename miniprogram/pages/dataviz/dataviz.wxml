@@ -1,0 +1,88 @@
+<view class="page-container" style="padding-top: {{statusBarHeight}}px;">
+  <top-bar letter="A" bind:search="onSearch"/>
+
+  <view class="content">
+    <view class="section-head">
+      <view class="title-col">
+        <text class="h1">就业数据分析</text>
+        <text class="subtitle">实时洞察软件工程岗位需求。</text>
+      </view>
+      <view class="filter-row">
+        <picker bindchange="onCityChange" value="{{cityIndex}}" range="{{cityOptions}}">
+          <view class="filter-pill">
+            <text>{{cityOptions[cityIndex]}}</text>
+            <text class="caret">⌄</text>
+          </view>
+        </picker>
+        <picker bindchange="onExpChange" value="{{expIndex}}" range="{{expOptions}}">
+          <view class="filter-pill">
+            <text>{{expOptions[expIndex]}}</text>
+            <text class="caret">⌄</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="chart-card">
+      <view class="chart-head">
+        <view class="col">
+          <text class="h3">AI 岗位需求增长</text>
+          <text class="chart-sub">职位空缺同比</text>
+        </view>
+        <view class="trend-tag {{trendYoY >= 0 ? 'up' : 'down'}}">
+          <text>{{trendYoY >= 0 ? '↗' : '↘'}}</text>
+          <text>{{trendYoY >= 0 ? '+' : ''}}{{trendYoY}}%</text>
+        </view>
+      </view>
+      <view class="line-chart">
+        <canvas
+          type="2d"
+          id="lineCanvas"
+          class="chart-canvas"
+          disable-scroll="true"
+          bindtouchstart="onLineTouch"
+          bindtouchmove="onLineTouch"
+          bindtouchend="onLineTouchEnd"
+        ></canvas>
+        <view
+          wx:if="{{lineTooltip.visible}}"
+          class="tooltip"
+          style="left:{{lineTooltip.x}}px; top:{{lineTooltip.y}}px;"
+        >
+          <text class="tooltip-title">{{lineTooltip.label}}</text>
+          <text class="tooltip-value">{{lineTooltip.value}}k 职位</text>
+        </view>
+      </view>
+      <view class="x-axis-labels">
+        <text class="axis-label" wx:for="{{xAxisLabels}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="chart-card">
+      <view class="col gap-xs">
+        <text class="h3">各角色平均薪资</text>
+        <text class="chart-sub">年薪 (k) {{loadingBars ? '· 加载中…' : ''}}</text>
+      </view>
+      <view class="bar-list">
+        <view class="bar-row" wx:for="{{salaryBars}}" wx:key="name" bindtap="onBarTap" data-name="{{item.name}}" data-value="{{item.value}}">
+          <text class="bar-label">{{item.name}}</text>
+          <view class="bar-track">
+            <view class="bar-fill" style="width:{{item.width}}%; opacity:{{item.opacity}};">
+              <text class="bar-value">{{item.value}}k</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="chart-card">
+      <view class="col gap-xs">
+        <text class="h3">热门技能热力图</text>
+        <text class="chart-sub">近期招聘岗位频率</text>
+      </view>
+      <view class="skill-cloud">
+        <view class="skill-pill {{item.level}}" wx:for="{{skills}}" wx:key="name" bindtap="onSkillTap" data-name="{{item.name}}">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+</view>

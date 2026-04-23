@@ -1,0 +1,40 @@
+<view class="page">
+  <view class="header">
+    <text class="h1">我的收藏</text>
+    <text class="sub">共 {{list.length}} 项</text>
+  </view>
+
+  <view class="filter-bar">
+    <view
+      class="filter-tab {{activeType === item.key ? 'active' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      bindtap="onTabTap"
+      data-key="{{item.key}}"
+    >
+      <text>{{item.label}}</text>
+      <text wx:if="{{counts[item.key]}}" class="count">{{counts[item.key]}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{!loading && filtered.length === 0}}" class="empty">
+    <text class="empty-icon">🗂</text>
+    <text class="empty-title">还没有收藏</text>
+    <text class="empty-sub">在内容页右下角点 ☆ 即可加入收藏</text>
+  </view>
+
+  <view class="list">
+    <view
+      class="card"
+      wx:for="{{filtered}}"
+      wx:key="_id"
+      bindtap="onItemTap"
+      data-item="{{item}}"
+    >
+      <view class="type-tag type-{{item.itemType}}">{{TYPE_LABEL[item.itemType] || item.itemType}}</view>
+      <text class="card-title">{{item.title || item.itemId}}</text>
+      <text class="card-time">收藏于 {{item._timeText}}</text>
+      <view class="del-btn" catchtap="onRemove" data-item="{{item}}">移除</view>
+    </view>
+  </view>
+</view>

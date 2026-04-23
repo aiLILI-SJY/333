@@ -1,0 +1,40 @@
+# 依赖（云函数上传到云端时再装，本地不需要）
+node_modules/
+**/node_modules/
+
+# 小程序开发者工具本地缓存
+miniprogram_npm/
+.wxcloud/
+
+# 本地环境变量（如有）
+.env
+.env.local
+.env.*.local
+
+# 压缩包（都可以从源码重新打）
+*.zip
+
+# IDE / 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# 辅助脚本 / 临时文件
+gen_tab_icons.ps1
+
+# 私有配置占位
+miniprogram/config/index.local.js
+
+# 之前的 UI 稿源文件（不是小程序的一部分）
+stitch_seeworld_tech_growth_platform/
+DATA/

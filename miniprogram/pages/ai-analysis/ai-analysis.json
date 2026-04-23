@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "AI 分析",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "top-bar": "/components/top-bar/top-bar"
+  }
+}

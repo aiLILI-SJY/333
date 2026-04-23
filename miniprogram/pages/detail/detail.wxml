@@ -1,0 +1,128 @@
+<view class="page">
+  <!-- 头部 -->
+  <view class="hero hero-{{type}}">
+    <text class="type-chip">{{typeLabel}}</text>
+    <text class="hero-title">{{meta.title}}</text>
+    <text wx:if="{{content.subtitle || content.hook}}" class="hero-sub">{{content.subtitle || content.hook}}</text>
+    <view wx:if="{{meta.tags && meta.tags.length}}" class="hero-tags">
+      <text class="hero-tag" wx:for="{{meta.tags}}" wx:key="*this">{{item}}</text>
+    </view>
+    <view wx:if="{{generatedAt}}" class="gen-meta">
+      <text>{{cached ? '已缓存' : 'AI 实时生成'}} · {{generatedAtText}}</text>
+      <view class="regen-btn" bindtap="onRegenerate">🔄 重新生成</view>
+    </view>
+  </view>
+
+  <!-- 加载 -->
+  <view wx:if="{{loading}}" class="loading-card">
+    <view class="spinner"></view>
+    <text class="loading-text">DeepSeek 正在为你生成深度解读…</text>
+    <text class="loading-sub">首次约 5~10 秒，之后将缓存 7 天</text>
+  </view>
+
+  <!-- 错误 -->
+  <view wx:if="{{error}}" class="error-card">
+    <text class="error-title">生成失败</text>
+    <text class="error-msg">{{error}}</text>
+    <view class="retry-btn" bindtap="onRetry">点击重试</view>
+  </view>
+
+  <!-- 内容区 -->
+  <block wx:if="{{!loading && !error && content}}">
+    <!-- 标准段落型 (hotspot/discussion/skill) -->
+    <view wx:if="{{content.sections}}" class="sections">
+      <view class="section" wx:for="{{content.sections}}" wx:key="heading">
+        <text class="section-h">{{item.heading}}</text>
+        <text class="section-body">{{item.body}}</text>
+      </view>
+    </view>
+
+    <!-- 关键词 / 相关技能（hotspot） -->
+    <view wx:if="{{content.keywords}}" class="sub-card">
+      <text class="sub-card-title">关键词</text>
+      <view class="chip-row">
+        <text class="chip" wx:for="{{content.keywords}}" wx:key="*this">#{{item}}</text>
+      </view>
+    </view>
+    <view wx:if="{{content.relatedSkills}}" class="sub-card">
+      <text class="sub-card-title">相关技能</text>
+      <view class="chip-row">
+        <text class="chip primary" wx:for="{{content.relatedSkills}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 观点启示（discussion） -->
+    <view wx:if="{{content.takeaways}}" class="sub-card highlight">
+      <text class="sub-card-title">可行动的启示</text>
+      <view class="takeaway-list">
+        <view class="takeaway" wx:for="{{content.takeaways}}" wx:key="*this">
+          <text class="takeaway-dot">✦</text>
+          <text class="takeaway-body">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 前置/岗位（skill） -->
+    <view wx:if="{{content.prerequisites}}" class="sub-card">
+      <text class="sub-card-title">前置技能</text>
+      <view class="chip-row">
+        <text class="chip" wx:for="{{content.prerequisites}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+    <view wx:if="{{content.careerFit}}" class="sub-card">
+      <text class="sub-card-title">适合岗位</text>
+      <view class="chip-row">
+        <text class="chip primary" wx:for="{{content.careerFit}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+    <view wx:if="{{content.estimatedWeeks}}" class="info-line">
+      <text>📅 预计学习周期：{{content.estimatedWeeks}} 周</text>
+    </view>
+
+    <!-- 模块列表（path） -->
+    <block wx:if="{{content.modules}}">
+      <view class="overview" wx:if="{{content.overview}}">
+        <text>{{content.overview}}</text>
+      </view>
+      <view class="modules">
+        <view class="module" wx:for="{{content.modules}}" wx:key="name" wx:for-index="idx">
+          <view class="module-head">
+            <text class="module-no">M{{idx + 1}}</text>
+            <view class="module-title-col">
+              <text class="module-name">{{item.name}}</text>
+              <text class="module-weeks">{{item.weeks}} 周</text>
+            </view>
+          </view>
+          <view class="module-topics">
+            <text class="topic" wx:for="{{item.topics}}" wx:for-item="t" wx:key="*this">• {{t}}</text>
+          </view>
+          <view wx:if="{{item.project}}" class="module-project">
+            <text class="project-label">产出</text>
+            <text class="project-body">{{item.project}}</text>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{content.outcome}}" class="sub-card highlight">
+        <text class="sub-card-title">完成后你能做什么</text>
+        <text class="outcome-body">{{content.outcome}}</text>
+      </view>
+    </block>
+
+    <!-- 阅读时间（discussion） -->
+    <view wx:if="{{content.readingTime}}" class="info-line">
+      <text>⏱ {{content.readingTime}}</text>
+    </view>
+  </block>
+
+  <!-- 底部操作栏 -->
+  <view wx:if="{{!loading && !error}}" class="footer safe-bottom">
+    <view class="fav-action {{favored ? 'active' : ''}}" bindtap="onFavoriteTap">
+      <text class="fav-icon">{{favored ? '★' : '☆'}}</text>
+      <text class="fav-text">{{favored ? '已收藏' : '收藏'}}</text>
+    </view>
+    <button class="share-btn" open-type="share">
+      <text class="share-icon">↗</text>
+      <text>分享</text>
+    </button>
+  </view>
+</view>

@@ -1,0 +1,10 @@
+.avatar-letter {
+  color: var(--color-text-secondary);
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.iconfont-search {
+  font-size: 44rpx;
+  color: var(--color-primary);
+  font-weight: bold;
+}

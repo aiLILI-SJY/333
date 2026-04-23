@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "数据可视化",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "top-bar": "/components/top-bar/top-bar"
+  }
+}

@@ -1,0 +1,104 @@
+<view class="page-container" style="padding-top: {{statusBarHeight}}px;">
+  <top-bar letter="A" bind:search="onSearch"/>
+
+  <view class="content">
+    <!-- 页面头 -->
+    <view class="page-header">
+      <text class="h1">DeepSeek 深度解读</text>
+      <text class="page-subtitle">自动化分析当前技术生态矢量。</text>
+    </view>
+
+    <!-- AI核心综述 -->
+    <view class="summary-card">
+      <view class="summary-bg">🧠</view>
+      <view class="summary-header">
+        <text class="summary-icon">✨</text>
+        <text class="summary-label">核心综述</text>
+      </view>
+      <view class="summary-list">
+        <view class="summary-item" wx:for="{{summary}}" wx:key="index">
+          <text class="check">✓</text>
+          <view class="summary-text">
+            <text class="strong">{{item.strong}}</text>
+            <text>{{item.rest}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 技术依赖图 -->
+    <view class="section">
+      <view class="section-title">
+        <text class="section-icon">🌲</text>
+        <text class="h3">技术依赖图</text>
+      </view>
+      <view class="tree-wrapper">
+        <view class="tree-canvas">
+          <!-- Root -->
+          <view class="tree-root">软件工程核心</view>
+          <view class="trunk"></view>
+          <!-- Layer 1 Horizontal Bar -->
+          <view class="branch-bar">
+            <view class="branch-stem left"></view>
+            <view class="branch-stem center"></view>
+            <view class="branch-stem right"></view>
+          </view>
+          <view class="layer-row">
+            <view class="tree-node">前端客户端</view>
+            <view class="tree-node">后端逻辑</view>
+            <view class="tree-node primary">数据系统</view>
+          </view>
+          <!-- Sub layer under 数据系统 -->
+          <view class="sub-branch">
+            <view class="sub-stem top"></view>
+            <view class="sub-bar"></view>
+            <view class="sub-stem bottom-left"></view>
+            <view class="sub-stem bottom-right"></view>
+          </view>
+          <view class="sub-row">
+            <view class="tree-leaf">Python</view>
+            <view class="tree-leaf">SQL</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 推荐学习路径 -->
+    <view class="section">
+      <view class="section-title">
+        <text class="section-icon">🛣</text>
+        <text class="h3">推荐学习路径</text>
+      </view>
+      <view wx:if="{{primaryPath}}" class="path-primary" bindtap="onPathTap" data-id="{{primaryPath.id}}">
+        <view class="path-icon-box">
+          <text class="path-icon">{{primaryPath.icon}}</text>
+        </view>
+        <text class="path-title">{{primaryPath.title}}</text>
+        <text class="path-desc">{{primaryPath.desc}}</text>
+        <view class="path-cta">
+          <text>{{primaryPath.cta}}</text>
+          <text class="arrow">→</text>
+        </view>
+      </view>
+
+      <view class="path-secondary-list">
+        <view class="path-secondary" wx:for="{{secondaryPaths}}" wx:key="id" bindtap="onPathTap" data-id="{{item.id}}">
+          <view class="row gap-xs">
+            <text class="secondary-icon {{item.tone}}">{{item.icon}}</text>
+            <text class="secondary-step">步骤 {{item.step}}</text>
+          </view>
+          <text class="secondary-title">{{item.title}}</text>
+          <view class="progress-track">
+            <view class="progress-fill {{item.tone}}" style="width: {{item.progress}}%;"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- FAB -->
+  <view class="fab" bindtap="onConvertToChallenge">
+    <text class="fab-icon">🏆</text>
+    <text class="fab-text">转化为竞赛选题</text>
+  </view>
+</view>

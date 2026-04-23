@@ -1,0 +1,62 @@
+<view class="page">
+  <view class="search-box">
+    <text class="search-icon">⌕</text>
+    <input
+      class="search-input-real"
+      placeholder="搜索趋势、框架、话题..."
+      placeholder-style="color:#9aa0a6;"
+      focus="{{autoFocus}}"
+      confirm-type="search"
+      value="{{keyword}}"
+      bindinput="onInput"
+      bindconfirm="onConfirm"
+    />
+    <text wx:if="{{keyword}}" class="clear-btn" bindtap="onClear">✕</text>
+  </view>
+
+  <!-- 无输入时：历史 + 热门 -->
+  <block wx:if="{{!keyword}}">
+    <view wx:if="{{history.length}}" class="section">
+      <view class="section-head-s">
+        <text class="h3">搜索历史</text>
+        <text class="link" bindtap="onClearHistory">清空</text>
+      </view>
+      <view class="chip-row">
+        <view class="chip" wx:for="{{history}}" wx:key="*this" bindtap="onUseKeyword" data-kw="{{item}}">{{item}}</view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="h3">热门搜索</text>
+      <view class="chip-row">
+        <view class="chip primary" wx:for="{{hot}}" wx:key="*this" bindtap="onUseKeyword" data-kw="{{item}}">🔥 {{item}}</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 有输入：结果 -->
+  <block wx:else>
+    <view class="section">
+      <text class="h3" wx:if="{{loading}}">搜索中…</text>
+      <text class="h3" wx:elif="{{!results.length}}">无匹配结果</text>
+      <text class="h3" wx:else>共 {{results.length}} 个结果</text>
+
+      <view class="result-list">
+        <view
+          class="result-item"
+          wx:for="{{results}}"
+          wx:key="id"
+          bindtap="onResultTap"
+          data-item="{{item}}"
+        >
+          <view class="result-type type-{{item.type}}">{{typeLabel[item.type]}}</view>
+          <view class="result-body">
+            <text class="result-title">{{item.title}}</text>
+            <text class="result-desc">{{item.desc}}</text>
+          </view>
+          <text class="result-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

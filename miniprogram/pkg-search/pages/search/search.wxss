@@ -1,0 +1,117 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  padding: 24rpx 40rpx 80rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 48rpx;
+  box-sizing: border-box;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-surface);
+  border-radius: 999rpx;
+  padding: 0 32rpx 0 72rpx;
+  height: 80rpx;
+  border: 1rpx solid var(--color-outline-variant);
+}
+.search-icon {
+  position: absolute;
+  left: 28rpx;
+  color: var(--color-outline);
+  font-size: 36rpx;
+}
+.search-input-real {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--color-on-surface);
+}
+.clear-btn {
+  color: var(--color-outline);
+  font-size: 28rpx;
+  padding: 0 16rpx;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+.section-head-s {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.link {
+  font-size: 24rpx;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+.chip {
+  background-color: var(--color-chip-bg);
+  color: var(--color-text-secondary);
+  padding: 12rpx 24rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+}
+.chip.primary {
+  background-color: var(--color-primary-tint);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+.result-item {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  background-color: var(--color-surface);
+  border: 1rpx solid var(--color-border);
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+.result-type {
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.result-type.type-trend { background-color: #FFE7D6; color: var(--color-tertiary); }
+.result-type.type-discussion { background-color: var(--color-primary-tint); color: var(--color-primary); }
+.result-type.type-skill { background-color: var(--color-secondary-tint); color: var(--color-secondary); }
+.result-type.type-path { background-color: #EDE7F6; color: #5E35B1; }
+
+.result-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+.result-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-on-surface);
+}
+.result-desc {
+  font-size: 24rpx;
+  color: var(--color-on-surface-variant);
+}
+.result-arrow {
+  font-size: 40rpx;
+  color: var(--color-outline);
+}
