@@ -1,3 +1,5 @@
+const { details, applyPlaceholders } = require('../data/details.js');
+
 module.exports = [
   {
     method: 'GET',
@@ -46,5 +48,32 @@ module.exports = [
       ],
       estimatedWeeks: 6
     })
+  },
+  {
+    method: 'POST',
+    match: (url) => url === '/ai/detail',
+    handle: ({ data }) => {
+      const { type, id, meta } = data || {};
+      if (!type || !id) return { __error: '缺少 type 或 id 参数' };
+
+      const bucket = details[type] || {};
+      // id 可能被 encodeURIComponent 过（如技能名），做一次 decode 兜底
+      let content = bucket[id] || bucket[decodeURIComponent(id)];
+
+      if (!content) {
+        const tmpl = details._fallback[type] || details._fallback.skill;
+        content = applyPlaceholders(tmpl, {
+          title: (meta && meta.title) || id,
+          id
+        });
+      }
+
+      return {
+        ...content,
+        generatedAt: Date.now(),
+        __cached: false,
+        model: 'demo-preset'
+      };
+    }
   }
 ];

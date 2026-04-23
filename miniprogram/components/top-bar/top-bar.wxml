@@ -1,7 +1,7 @@
 <view class="top-app-bar">
   <view class="row gap-xs" bindtap="onAvatarTap">
     <view class="avatar">
-      <image src="{{avatar}}" mode="aspectFill" wx:if="{{avatar}}"/>
+      <image src="{{avatar}}" mode="aspectFill" wx:if="{{avatar}}" binderror="onAvatarLoadError"/>
       <text wx:else class="avatar-letter">{{letter}}</text>
     </view>
     <text class="logo">见世界</text>

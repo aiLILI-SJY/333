@@ -219,6 +219,13 @@ Page({
     wx.navigateTo({ url: '/pages/edit-profile/edit-profile' });
   },
 
+  // 头像加载失败（微信临时路径跨启动会失效）→ 回落到首字母圆
+  onAvatarLoadError() {
+    this.setData({ avatar: '' });
+    const user = Object.assign({}, app.globalData.userInfo, { avatar: '' });
+    app.globalData.userInfo = user;
+  },
+
   onMenuTap(e) {
     const id = e.currentTarget.dataset.id;
     const urlMap = {

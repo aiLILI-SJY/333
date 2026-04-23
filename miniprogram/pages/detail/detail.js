@@ -35,8 +35,8 @@ Page({
 
     this.fetchDetail(false);
     this.syncFavorite();
-    // 上报阅读
-    api.read.record(type, id).catch(() => {});
+    // 上报阅读（带标题方便历史页渲染）
+    api.read.record(type, id, meta.title || '').catch(() => {});
   },
 
   onPullDownRefresh() {

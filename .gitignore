@@ -20,6 +20,9 @@ miniprogram_npm/
 *.swp
 *.swo
 
+# Claude Code 本地设置（个人偏好，不该进仓库）
+.claude/
+
 # macOS
 .DS_Store
 Thumbs.db
@@ -35,6 +38,6 @@ gen_tab_icons.ps1
 # 私有配置占位
 miniprogram/config/index.local.js
 
-# 之前的 UI 稿源文件（不是小程序的一部分）
-stitch_seeworld_tech_growth_platform/
-DATA/
+# 之前的 UI 稿源文件（不是小程序的一部分，路径前缀 / 限定根目录，避免误伤 mocks/data）
+/stitch_seeworld_tech_growth_platform/
+/DATA/

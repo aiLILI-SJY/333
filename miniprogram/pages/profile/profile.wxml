@@ -11,7 +11,7 @@
       >
         <view class="avatar-wrap">
           <view class="avatar-circle">
-            <image wx:if="{{avatar}}" src="{{avatar}}" class="avatar-img" mode="aspectFill"/>
+            <image wx:if="{{avatar}}" src="{{avatar}}" class="avatar-img" mode="aspectFill" binderror="onAvatarLoadError"/>
             <text wx:else class="avatar-initial">{{avatarInitial}}</text>
           </view>
           <view class="verified-badge">✓</view>

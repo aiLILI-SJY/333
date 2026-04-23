@@ -28,6 +28,9 @@ Component({
       // 跳到个人中心 tab
       wx.switchTab({ url: '/pages/profile/profile' });
     },
+    onAvatarLoadError() {
+      this.setData({ avatar: '' });
+    },
     onSearch() {
       this.triggerEvent('search');
       wx.navigateTo({ url: '/pkg-search/pages/search/search' });

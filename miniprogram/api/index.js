@@ -39,7 +39,7 @@ module.exports = {
     list: () => get('/favorites')
   },
   read: {
-    record: (itemType, itemId) => post('/read/record', { itemType, itemId }),
+    record: (itemType, itemId, title) => post('/read/record', { itemType, itemId, title }),
     history: (page = 1, pageSize = 20) => get('/read/history', { page, pageSize })
   }
 };
